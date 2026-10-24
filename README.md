@@ -1,63 +1,56 @@
-# **DevOps Lab Manual**
+# DevOps Practical Engineering Lab & Projects
 
-Welcome to the **DevOps Lab Manual**, your starter guide to mastering DevOps concepts! This repository is  curated to serve as a **one-stop resource and reference** for undergraduate students embarking on their DevOps journey. From fundamental concepts to near real-world assignments, it’s all here to make your learning experience seamless and pragmatic.
-
-## **About This Manual**
-
-This DevOps Lab Manual was developed during the teaching of  **DevOps Course**  inspired by the curiosity and enthusiasm of students eager to delve into the nuances of DevOps. Their interest in understanding complex workflows and real-world applications has shaped this repository into a comprehensive guide tailored for undergraduate students.
-
-I would like to express my heartfelt gratitude to all the students, colleagues and contributors who have played a vital role in shaping this manual. Your insights, questions and dedication to learning have been invaluable in making this resource as practical and engaging as possible. 
+A comprehensive hands-on DevOps laboratory repository showcasing end-to-end implementations of containerization, continuous integration, container security, distributed monitoring, and multi-node Kubernetes cluster orchestration.
 
 ---
 
-## **What's Inside?**
+## 🛠️ Technology Stack & Tools
 
-- **📝 Notes**: Concise explanations of core DevOps concepts, tools and methodologies. (work in progress)
-- **💻 Exercises**: Hands-on labsand projects designed to reinforce your skills.
-- **📖 Assignments**: Challenging, real-world scenarios to simulate industry practices.
-- **🔗 References**: Handpicked articles, blogs and videos to deepen your understanding.
-### To Be Added
-- **⚙️ Tools and Tips**: Pro tips and guidance for using Docker, Kubernetes, Jenkins, Git and  more.
-- **🎯 Best Practices**: Key takeaways to adopt DevOps culture and practices effectively.
-- **🛡️ DevSecOps**: Integrating security into DevOps lifecycle, ensuring proactive threat detection, secure code practices and compliance automation.
----
-
-## **Who is this For?**
-
-This repository is designed for **undergraduate students** who are:
-- Looking to gain practical experience in **DevOps tools and workflows**.
-- Preparing to tackle **industry challenges** with confidence.
-
-Whether you're new to DevOps or seeking to refine your skills, this lab manual has something for everyone!
+- **Containerization & Runtimes:** Docker, Docker Compose, Containerd
+- **Cluster Orchestration:** Kubernetes (Minikube multi-node cluster, kubectl)
+- **Continuous Integration / Continuous Delivery (CI/CD):** Jenkins (Declarative multi-stage pipelines)
+- **Monitoring & Observability:** Prometheus (Time-series metrics, alert rules), Grafana (Interactive operational dashboards)
+- **Application & Testing:** Python 3 (Flask REST APIs, unittest), Bash shell scripting
+- **Security & Networking:** AppArmor container security profiles, Docker custom bridge networks
 
 ---
 
-## **Key Features**
+## 📂 Repository Structure & Lab Modules
 
-1. **Engaging Exercies**: From simple Docker exercises to advanced Kubernetes orchestration, build your portfolio as you learn.
-2. **Hands-On Learning**: Dive into step-by-step guides for containerization, CI/CD pipelines, infrastructure as code and  more.
-3. **Real-World Use Cases**: Solve scenarios inspired by industry practices, like deploying scalable applications with Kubernetes or setting up robust CI/CD workflows.
-4. **Streamlined Content**: All notes, references and  exercises are structured to align with UG-level coursework.
-
----
-
-## **Why DevOps?**
-
-DevOps is not just a buzzword—it’s a **must-have skill** in today’s automation driver tech-world. By adopting DevOps practices, you’ll:
-- Bridge the gap between development and operations teams.
-- Enhance your ability to deliver high-quality software faster.
-- Prepare for exciting career opportunities in the ever-evolving tech landscape.
-
----
-
-## **Get Started Today!**
-
-Start exploring and leveling up your DevOps skills with this repository. Let’s make learning **DevOps intuitive, fun and impactful**!
+| Directory | Module / Exercise | Focus Area & Description |
+|:---|:---|:---|
+| [`Exercise-01-Kubernetes`](./Exercise-01-Kubernetes) | **Kubernetes Fundamentals** | Cluster setup, Pod deployment, and service connectivity verification. |
+| [`Exercise-02-Minikube-Flask`](./Exercise-02-Minikube-Flask) | **Flask on Kubernetes** | Containerizing a Flask web application, building within Minikube, and exposing via NodePort. |
+| [`Exercise-03-ReplicaSet`](./Exercise-03-ReplicaSet) | **Scaling with ReplicaSets** | High-availability flash-sale application with auto-healing and scaling replicas. |
+| [`Exercise-04-Docker-Networking`](./Exercise-04-Docker-Networking) | **Docker Custom Networking** | Multi-container microservices architecture (Flask + MySQL + Redis) communicating on a dedicated bridge network. |
+| [`Exercise-05-Docker-Security-AppArmor`](./Exercise-05-Docker-Security-AppArmor) | **Container Security (AppArmor)** | Implementing security profiles with Docker SDK for Python to restrict unauthorized OS-level operations. |
+| [`Exercise-06-Grafana-Monitoring`](./Exercise-06-Grafana-Monitoring) | **Real-Time Observability** | Live delivery metrics generator, Prometheus scraping, automated alert rules, and 4-panel Grafana monitoring dashboard. |
+| [`Exercise-07-Jenkins-CI-Automation`](./Exercise-07-Jenkins-CI-Automation) | **Jenkins CI Initialization** | Containerized Jenkins deployment, admin credentials lifecycle, and baseline plugin configuration. |
+| [`Exercise-08-Jenkins-Hello-World`](./Exercise-08-Jenkins-Hello-World) | **Jenkins Freestyle Automation** | Creating and executing a Freestyle build job running custom shell scripts with console verification. |
+| [`Exercise-09-Jenkins-Multi-Stage-Pipeline`](./Exercise-09-Jenkins-Multi-Stage-Pipeline) | **Multi-Stage CI/CD Pipeline** | Automated 5-stage declarative pipeline (Build, Unit Test, Staging Deploy, Background Run, and Validation). |
+| [`Exercise-10-Minikube-Multi-Node-Multi-App`](./Exercise-10-Minikube-Multi-Node-Multi-App) | **Multi-Node Cluster Deployment** | 3-node Kubernetes cluster hosting independent microservices (Product Catalog & Shopping Cart) distributed via `podAntiAffinity`. |
 
 ---
 
-## **Contact**
+## 🚀 Key Highlights & Architectural Implementations
 
-- **Sunag P**
-  - LinkedIn: [https://www.linkedin.com/in/sunagp/](https://www.linkedin.com/in/sunagp/)
-  - Instagram: [https://www.instagram.com/sunag3007/](https://www.instagram.com/sunag3007/)
+1. **High Availability & Fault Tolerance**:
+   - Implemented Kubernetes `podAntiAffinity` scheduling across a 3-node cluster to guarantee that application replicas reside on separate physical worker nodes.
+
+2. **Automated CI/CD Quality Gates**:
+   - Built declarative pipelines in Jenkins that compile, run unit test suites, stage artifacts, and safely manage background processes.
+
+3. **Full-Stack Observability**:
+   - Instrumented custom application metrics using `prometheus-client`, configured Prometheus time-series scraping with threshold alerting rules, and visualized operational telemetry in Grafana.
+
+4. **Microservices Communication**:
+   - Established isolated container bridge networks for seamless inter-service communication without exposing internal services directly to the public network.
+
+---
+
+## ⚙️ Environment Setup
+
+- **Host OS:** Windows 11 (PowerShell & WSL2)
+- **Container Engine:** Docker Desktop (WSL2 engine backend)
+- **Local Kubernetes:** Minikube v1.39+ with multi-node profiles (`devops-multinode`)
+- **Python Runtime:** Python 3.11+
