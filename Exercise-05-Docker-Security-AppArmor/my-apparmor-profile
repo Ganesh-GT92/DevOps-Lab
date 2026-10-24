@@ -1,0 +1,14 @@
+#include <tunables/global>
+
+profile my-apparmor-profile flags=(attach_disconnected) {
+    #include <abstractions/base>
+
+    file,
+    network,
+    capability,
+
+    deny /etc/** wklx,
+    deny /root/** rwklx,
+    deny /proc/** w,
+    deny /sys/** w,
+}
