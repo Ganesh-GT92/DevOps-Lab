@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+    environment {
+        // Ensure Docker commands can be run
+        DOCKER_HOST = 'tcp://localhost:2375'
+    }
+    stages {
+        stage('Setup') {
+            steps {
+                echo 'Starting delivery metrics script with HIGH_PENDING for alert testing'
+                // Run the metrics script in background on the host
+                // Using PowerShell to set env var and start script
+                bat "powershell -NoProfile -Command \"$env:HIGH_PENDING='1'; python delivery_metrics.py\" &"
+            }
+        }
+        stage('Start Prometheus') {
+            steps {
+                echo 'Starting Prometheus container (if not already running)'
+                script {
+                    def exists = sh(script: "docker ps -q -f name=prometheus", returnStdout: true).trim()
+                    if (!exists) {
+                        sh "docker run -d --name prometheus --network monitoring -p 9090:9090 -v ${WORKSPACE}/prometheus.yml:/etc/prometheus/prometheus.yml -v ${WORKSPACE}/alert_rules.yml:/etc/prometheus/alert_rules.yml prom/prometheus"
+                    }
+                }
+            }
+        }
+        stage('Start Grafana') {
+            steps {
+                echo 'Starting Grafana container (if not already running)'
+                script {
+                    def exists = sh(script: "docker ps -q -f name=grafana", returnStdout: true).trim()
+                    if (!exists) {
+                        sh "docker run -d --name grafana --network monitoring -p 3000:3000 grafana/grafana"
+                    }
+                }
+            }
+        }
+        stage('Verify Alerts') {
+            steps {
+                // Wait for a short period to allow alerts to fire
+                sleep time: 20, unit: 'SECONDS'
+                echo 'Fetching Prometheus alerts'
+                sh "curl -s http://localhost:9090/api/v1/alerts | jq ."
+            }
+        }
+    }
+    post {
+        always {
+            echo 'Cleaning up background processes'
+            // Kill the Python script (best effort)
+            powershell "Get-Process -Name python -ErrorAction SilentlyContinue | Stop-Process -Force"
+        }
+    }
+}

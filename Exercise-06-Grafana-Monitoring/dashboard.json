@@ -1,0 +1,96 @@
+{
+  "dashboard": {
+    "id": null,
+    "uid": "delivery-monitoring",
+    "title": "Delivery Monitoring",
+    "tags": ["templated"],
+    "timezone": "browser",
+    "schemaVersion": 39,
+    "version": 1,
+    "refresh": "5s",
+    "panels": [
+      {
+        "type": "stat",
+        "title": "Total Deliveries",
+        "gridPos": { "h": 8, "w": 6, "x": 0, "y": 0 },
+        "id": 1,
+        "datasource": { "type": "prometheus", "uid": "ag2832xlytjwga" },
+        "targets": [
+          {
+            "datasource": { "type": "prometheus", "uid": "ag2832xlytjwga" },
+            "expr": "total_deliveries",
+            "refId": "A"
+          }
+        ],
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto"
+        }
+      },
+      {
+        "type": "stat",
+        "title": "Pending Deliveries",
+        "gridPos": { "h": 8, "w": 6, "x": 6, "y": 0 },
+        "id": 2,
+        "datasource": { "type": "prometheus", "uid": "ag2832xlytjwga" },
+        "targets": [
+          {
+            "datasource": { "type": "prometheus", "uid": "ag2832xlytjwga" },
+            "expr": "pending_deliveries",
+            "refId": "A"
+          }
+        ],
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto"
+        }
+      },
+      {
+        "type": "stat",
+        "title": "On-the-Way Deliveries",
+        "gridPos": { "h": 8, "w": 6, "x": 12, "y": 0 },
+        "id": 3,
+        "datasource": { "type": "prometheus", "uid": "ag2832xlytjwga" },
+        "targets": [
+          {
+            "datasource": { "type": "prometheus", "uid": "ag2832xlytjwga" },
+            "expr": "on_the_way_deliveries",
+            "refId": "A"
+          }
+        ],
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto"
+        }
+      },
+      {
+        "type": "stat",
+        "title": "Average Delivery Time",
+        "gridPos": { "h": 8, "w": 6, "x": 18, "y": 0 },
+        "id": 4,
+        "datasource": { "type": "prometheus", "uid": "ag2832xlytjwga" },
+        "targets": [
+          {
+            "datasource": { "type": "prometheus", "uid": "ag2832xlytjwga" },
+            "expr": "average_delivery_time_sum / average_delivery_time_count",
+            "refId": "A"
+          }
+        ],
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "s"
+          }
+        }
+      }
+    ]
+  },
+  "overwrite": true
+}
